@@ -1,6 +1,6 @@
 // frontend/src/App.jsx
 import React, { useState, useEffect } from "react";
-import World2D from "./components/World2D";
+import World2DMap from "./components/World2DMap";
 import ChatBox from "./components/ChatBox";
 import NPCCard from "./components/NPCCard";
 import { interact } from "./api";
@@ -70,7 +70,7 @@ export default function App() {
 
       {/* Map area */}
       <div className="canvas-wrap">
-        <World2D onTalkRequest={handleTalkRequest} />
+        <World2DMap onTalkRequest={handleTalkRequest} />
       </div>
 
       {/* Info panel */}
