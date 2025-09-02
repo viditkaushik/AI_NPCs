@@ -34,6 +34,111 @@ function lerp(a, b, t) { return a + (b - a) * t; }
 function lerpPos(a, b, t) { return [lerp(a[0], b[0], t), lerp(a[1], b[1], t)]; }
 function dist(a,b){ return Math.hypot(a[0]-b[0], a[1]-b[1]); }
 
+const NPC_PROFILES = {
+  guard: {
+    id: "guard",
+    name: "Brennus",
+    role: "Royal Guard",
+    personality: "veteran guard, loyal to city and crown but jaded by corruption, professional but worn down by low pay and noble corruption, sees small bribes as owed payment",
+    goals: ["Protect the gate", "maintain professional duty", "get fair compensation"],
+    traits: ["Loyal but jaded", "Professional", "Pragmatic about corruption"],
+    knowledge: [
+      "Knows the official guest lists",
+      "Aware of noble corruption",
+      "Has a known preference for a favored bribe (a coin from a specific mint)"
+    ],
+    greeting_seed: "Halt. State your business. Papers, please — or keep walking."
+  },
+  guard2: {
+    id: "guard2",
+    name: "Brennus",
+    role: "Royal Guard",
+    personality: "veteran guard, loyal to city and crown but jaded by corruption, professional but worn down by low pay and noble corruption, sees small bribes as owed payment",
+    goals: ["Protect the gate", "maintain professional duty", "get fair compensation"],
+    traits: ["Loyal but jaded", "Professional", "Pragmatic about corruption"],
+    knowledge: [
+      "Knows the official guest lists",
+      "Aware of noble corruption",
+      "Has a known preference for a favored bribe (a coin from a specific mint)"
+    ],
+    greeting_seed: "Halt. State your business. Papers, please — or keep walking."
+  },
+  old_man: {
+    id: "old_man",
+    name: "Kael",
+    role: "Retired Dockworker",
+    personality: "cynical, sarcastic, untrusting, pessimistic, knowledgeable but reluctant, complains about everything, gruff, short sentences, deep-seated cynic soured by hard labor, trusts no one",
+    goals: ["Watch the world go by", "Hoard knowledge like gold"],
+    traits: ["Cynic", "Suspicious", "Bitter"],
+    knowledge: [
+      "Wealth of knowledge about town's comings and goings",
+      "Knows of Helios, a former prisoner who knows guard routes",
+      "Often complains about weather, guards, and fish prices"
+    ],
+    greeting_seed: "Why would a stranger like you need to know that? Bah, what's the weather to you anyway?"
+  },
+  thief: {
+    id: "thief",
+    name: "Shadow",
+    role: "Thief",
+    personality: "stealthy, quick-witted, opportunistic, street-smart",
+    goals: ["Stay hidden", "Find valuable targets", "Avoid guards"],
+    traits: ["Sneaky", "Observant", "Quick"],
+    knowledge: ["Knows secret passages", "Aware of guard patrol times", "Knows valuable items locations"],
+    greeting_seed: "Shh... keep your voice down. What do you want?"
+  },
+  merchant: {
+    id: "merchant",
+    name: "Trader",
+    role: "Merchant",
+    personality: "business-minded, friendly to customers, always looking for profit",
+    goals: ["Make profitable trades", "Expand business", "Build reputation"],
+    traits: ["Persuasive", "Knowledgeable about goods", "Networked"],
+    knowledge: ["Market prices", "Trade routes", "Customer preferences"],
+    greeting_seed: "Welcome, welcome! Looking for anything particular today?"
+  },
+  bartender: {
+    id: "bartender",
+    name: "Innkeeper",
+    role: "Bartender",
+    personality: "friendly, good listener, knows everyone's business",
+    goals: ["Keep customers happy", "Gather information", "Run successful tavern"],
+    traits: ["Social", "Trustworthy", "Well-informed"],
+    knowledge: ["Local gossip", "Traveler stories", "Town secrets"],
+    greeting_seed: "What'll it be? Ale, wine, or perhaps some conversation?"
+  },
+  woman_1: {
+    id: "woman_1",
+    name: "Elena",
+    role: "Townswoman",
+    personality: "cautious, observant, hardworking",
+    goals: ["Support family", "Stay safe", "Mind own business"],
+    traits: ["Careful", "Observant", "Practical"],
+    knowledge: ["Local happenings", "Family matters", "Daily routines"],
+    greeting_seed: "Good day to you. Is there something you need?"
+  },
+  woman_2: {
+    id: "woman_2",
+    name: "Maria",
+    role: "Townswoman",
+    personality: "friendly, helpful, community-minded",
+    goals: ["Help neighbors", "Maintain community", "Raise children well"],
+    traits: ["Kind", "Helpful", "Social"],
+    knowledge: ["Community news", "Family connections", "Local traditions"],
+    greeting_seed: "Hello there! How can I help you today?"
+  },
+  boy: {
+    id: "boy",
+    name: "Tommy",
+    role: "Village Boy",
+    personality: "curious, energetic, playful, sometimes mischievous",
+    goals: ["Have fun", "Explore", "Avoid chores"],
+    traits: ["Curious", "Energetic", "Innocent"],
+    knowledge: ["Secret hiding spots", "Adult conversations overheard", "Local games and fun"],
+    greeting_seed: "Hey! Want to play? I know all the best hiding spots!"
+  }
+};
+
 export default function World2DMap({ onTalkRequest }) {
   const containerRef = useRef(null);
   const [entities, setEntities] = useState(() => INITIAL_CHARACTERS);
@@ -269,7 +374,8 @@ export default function World2DMap({ onTalkRequest }) {
           if (d < best) { best = d; nearestEnt = ent; }
         });
         if (nearestEnt && best <= 80) {
-          onTalkRequest && onTalkRequest(nearestEnt.id);
+          const profile = NPC_PROFILES[nearestEnt.id] || { id: nearestEnt.id, name: nearestEnt.name, role: 'Unknown' };
+          onTalkRequest && onTalkRequest({ type: 'npc', id: nearestEnt.id, profile });
           return;
         }
         

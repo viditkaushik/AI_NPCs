@@ -9,15 +9,19 @@ export default function NPCCard({ subject }) {
   useEffect(() => {
     if (!subject) { setProfile(null); return; }
     if (subject.type === "npc" && subject.id) {
-      setLoading(true);
-      fetch(`/npcs/${subject.id}.json`)
-        .then((r) => {
-          if (!r.ok) throw new Error("Not found");
-          return r.json();
-        })
-        .then((j) => setProfile(j))
-        .catch(() => setProfile({ id: subject.id, name: subject.id, role: "Unknown", personality: "—", goals: [], knowledge: [], greeting_seed: "" }))
-        .finally(() => setLoading(false));
+      if (subject.profile) {
+        setProfile(subject.profile);
+      } else {
+        setLoading(true);
+        fetch(`/npcs/${subject.id}.json`)
+          .then((r) => {
+            if (!r.ok) throw new Error("Not found");
+            return r.json();
+          })
+          .then((j) => setProfile(j))
+          .catch(() => setProfile({ id: subject.id, name: subject.id, role: "Unknown", personality: "—", goals: [], knowledge: [], greeting_seed: "" }))
+          .finally(() => setLoading(false));
+      }
     } else if (subject.type === "area") {
       const areaHints = {
         royal_court: { id: 'royal_court', name: 'Royal Court', role: 'Restricted Area', personality: '', goals: [], knowledge: [], greeting_seed: 'Access is denied for now. Enter to know more.' },

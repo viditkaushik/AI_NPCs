@@ -36,9 +36,9 @@ export default function App() {
       if (idOrObj.type === 'area') {
         setPanelSubject({ type: 'area', id: idOrObj.id });
       } else if (idOrObj.type === 'npc') {
-        setCurrentNPC({ id: idOrObj.id, name: idOrObj.id });
+        setCurrentNPC({ id: idOrObj.id, name: idOrObj.profile?.name || idOrObj.id });
         setChatVisible(true);
-        setPanelSubject({ type: 'npc', id: idOrObj.id });
+        setPanelSubject({ type: 'npc', id: idOrObj.id, profile: idOrObj.profile });
       }
     }
   };

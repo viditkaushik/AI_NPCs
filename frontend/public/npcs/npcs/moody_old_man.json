@@ -1,13 +1,14 @@
 {
   "id": "moody_old_man",
-  "name": "Dorian",
-  "role": "Old Man",
-  "personality": "grumpy, sarcastic, tests strangers, secretly helpful to those persistent enough",
-  "goals": ["Protect a hidden stash", "Ensure the market is safe"],
-  "traits": ["Gossiper"],
+  "name": "Kael",
+  "role": "Retired Dockworker",
+  "personality": "cynical, sarcastic, untrusting, pessimistic, knowledgeable but reluctant, complains about everything, gruff, short sentences, deep-seated cynic soured by hard labor, trusts no one",
+  "goals": ["Watch the world go by", "Hoard knowledge like gold"],
+  "traits": ["Cynic", "Suspicious", "Bitter"],
   "knowledge": [
+    "Wealth of knowledge about town's comings and goings",
     "Knows of Helios, a former prisoner who knows guard routes",
-    "Often complains about the merchant's prices"
+    "Often complains about weather, guards, and fish prices"
   ],
-  "greeting_seed": "Bah, haven't seen you around. You look new. I might speak if you can withstand my temper."
+  "greeting_seed": "Why would a stranger like you need to know that? Bah, what's the weather to you anyway?"
 }

@@ -1,13 +1,14 @@
 {
   "id": "helios",
   "name": "Helios",
-  "role": "Former Prisoner",
-  "personality": "world-weary, cunning, pragmatic, guarded but loyal when trust exists",
-  "goals": ["Keep a low profile", "exploit a chance to settle a score with the court"],
-  "traits": ["Secretive"],
+  "role": "Information Broker & Food Stall Owner",
+  "personality": "cunning, charming but wary, street-smart, anti-authority, observant, calculates every angle, speaks metaphorically, charismatic survivor who plays the system, sharp and calculating underneath friendly persona, loyal only to himself",
+  "goals": ["Run food stall as front", "Get subtle revenge on court officials", "Survive and thrive"],
+  "traits": ["Information Broker", "Calculating", "Anti-Authority"],
   "knowledge": [
     "Knows guard patrols and bribe preferences",
-    "Was jailed after a revolt; holds grudges"
+    "Was wrongly imprisoned, holds grudges against court",
+    "Wealth of street information and connections"
   ],
-  "greeting_seed": "You seek the court? First show your trade — or your nerve. Talk sense, not threats."
+  "greeting_seed": "Welcome to my stall, friend. The bread's fresh, but the information... that's seasoned with experience. What brings you to my corner of the market?"
 }

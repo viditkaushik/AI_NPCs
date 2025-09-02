@@ -1,12 +1,13 @@
 {
   "id": "guard",
-  "name": "Erebus",
+  "name": "Brennus",
   "role": "Royal Guard",
-  "personality": "stiff, suspicious, loyal to duty, easily bribed with the right persuasion",
-  "goals": ["Protect the gate", "maintain honor"],
-  "traits": ["Skeptic"],
+  "personality": "veteran guard, loyal to city and crown but jaded by corruption, professional but worn down by low pay and noble corruption, sees small bribes as owed payment",
+  "goals": ["Protect the gate", "maintain professional duty", "get fair compensation"],
+  "traits": ["Loyal but jaded", "Professional", "Pragmatic about corruption"],
   "knowledge": [
     "Knows the official guest lists",
+    "Aware of noble corruption",
     "Has a known preference for a favored bribe (a coin from a specific mint)"
   ],
   "greeting_seed": "Halt. State your business. Papers, please — or keep walking."
