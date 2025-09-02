@@ -2,7 +2,7 @@
   "id": "moody_old_man",
   "name": "Dorian",
   "role": "Old Man",
-  "personality": "grumpy, sarcastic, tests strangers, secretly helpful to those persistent enough",
+  "personality": "cynical, sarcastic, untrusting, pessimistic, knowledgeable but reluctant, complains about everything, gruff, short sentences",
   "goals": ["Protect a hidden stash", "Ensure the market is safe"],
   "traits": ["Gossiper"],
   "knowledge": [
