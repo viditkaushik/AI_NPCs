@@ -21,7 +21,13 @@ const INITIAL_CHARACTERS = [
   { id: "guard2", name: "Royal Guard", type: "npc", pos: [1372, 502],
     path: [[1372, 502], [1374, 924]], speed: 50, _meta: { idx: 0, t: 0, pauseUntil: 0 } },
   { id: "bartender", name: "Bartender", type: "npc", pos: [2396, 258],
-    path: [[2396, 258], [2666, 278], [2620, 272], [2642, 1074], [1474, 1204], [2646, 1318]], speed: 45, _meta: { idx: 0, t: 0, pauseUntil: 0 } }
+    path: [[2396, 258], [2666, 278], [2620, 272], [2642, 1074], [1474, 1204], [2646, 1318]], speed: 45, _meta: { idx: 0, t: 0, pauseUntil: 0 } },
+  { id: "woman_2", name: "Woman", type: "npc", pos: [2276, 230],
+    path: [[2276, 230], [2558, 332]], speed: 15, _meta: { idx: 0, t: 0, pauseUntil: 0 } },
+  { id: "boy", name: "Boy", type: "npc", pos: [2534, 532],
+    path: [[2534, 532], [2546, 540]], speed: 10, _meta: { idx: 0, t: 0, pauseUntil: 0 } },
+  { id: "woman_1", name: "Woman 1", type: "npc", pos: [118, 42],
+    path: [[118, 42], [176, 1436]], speed: 8, _meta: { idx: 0, t: 0, pauseUntil: 0 } }
 ];
 
 function lerp(a, b, t) { return a + (b - a) * t; }
@@ -84,7 +90,7 @@ export default function World2DMap({ onTalkRequest }) {
             while (t >= 1.0) {
               t -= 1.0;
               idx = (idx + 1) % ent.path.length;
-              pauseUntil = now + 5000;
+              pauseUntil = now + (ent.id === 'woman_2' ? 8000 : ent.id === 'woman_1' ? 12000 : 5000);
             }
             
             const newPos = lerpPos(ent.path[idx], ent.path[(idx + 1) % ent.path.length], t);
@@ -491,6 +497,78 @@ export default function World2DMap({ onTalkRequest }) {
               <img
                 key={ent.id}
                 src="assets/bartender.png"
+                alt={ent.name}
+                title={ent.name}
+                onClick={() => isNearNPC && onTalkRequest && onTalkRequest(ent.id)}
+                style={{
+                  left: ent.pos[0] - size/2,
+                  top: ent.pos[1] - size/2,
+                  width: size,
+                  height: size,
+                  position: "absolute",
+                  borderRadius: "50%",
+                  border: "2px solid rgba(255,255,255,0.5)",
+                  boxShadow: isNearNPC ? "0 0 18px 6px rgba(255,215,0,0.8)" : "none",
+                  cursor: isNearNPC ? "pointer" : "default",
+                  zIndex: 35
+                }}
+              />
+            );
+          }
+          
+          if (ent.id === 'woman_2') {
+            return (
+              <img
+                key={ent.id}
+                src="assets/woman_2.png"
+                alt={ent.name}
+                title={ent.name}
+                onClick={() => isNearNPC && onTalkRequest && onTalkRequest(ent.id)}
+                style={{
+                  left: ent.pos[0] - size/2,
+                  top: ent.pos[1] - size/2,
+                  width: size,
+                  height: size,
+                  position: "absolute",
+                  borderRadius: "50%",
+                  border: "2px solid rgba(255,255,255,0.5)",
+                  boxShadow: isNearNPC ? "0 0 18px 6px rgba(255,215,0,0.8)" : "none",
+                  cursor: isNearNPC ? "pointer" : "default",
+                  zIndex: 35
+                }}
+              />
+            );
+          }
+          
+          if (ent.id === 'boy') {
+            return (
+              <img
+                key={ent.id}
+                src="assets/boy.png"
+                alt={ent.name}
+                title={ent.name}
+                onClick={() => isNearNPC && onTalkRequest && onTalkRequest(ent.id)}
+                style={{
+                  left: ent.pos[0] - size/2,
+                  top: ent.pos[1] - size/2,
+                  width: size,
+                  height: size,
+                  position: "absolute",
+                  borderRadius: "50%",
+                  border: "2px solid rgba(255,255,255,0.5)",
+                  boxShadow: isNearNPC ? "0 0 18px 6px rgba(255,215,0,0.8)" : "none",
+                  cursor: isNearNPC ? "pointer" : "default",
+                  zIndex: 35
+                }}
+              />
+            );
+          }
+          
+          if (ent.id === 'woman_1') {
+            return (
+              <img
+                key={ent.id}
+                src="assets/woman_1.png"
                 alt={ent.name}
                 title={ent.name}
                 onClick={() => isNearNPC && onTalkRequest && onTalkRequest(ent.id)}
