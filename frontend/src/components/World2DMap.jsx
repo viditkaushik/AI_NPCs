@@ -389,7 +389,7 @@ export default function World2DMap({ onTalkRequest }) {
         {/* Entities */}
         {entities.map(ent => {
           const isPlayer = ent.type === 'player';
-          const size = isPlayer ? 36 : 64;
+          const size = isPlayer ? 80 : 96;
           const initials = ent.name ? ent.name.split(" ").map(s=>s[0]).slice(0,2).join("") : ent.id.slice(0,2);
           
           const player = entities[playerIdx];
@@ -588,16 +588,37 @@ export default function World2DMap({ onTalkRequest }) {
             );
           }
           
+          if (isPlayer) {
+            return (
+              <img
+                key={ent.id}
+                src="assets/nico.png"
+                alt={ent.name}
+                title={ent.name}
+                style={{
+                  left: ent.pos[0] - size/2,
+                  top: ent.pos[1] - size/2,
+                  width: size,
+                  height: size,
+                  position: "absolute",
+                  borderRadius: "50%",
+                  border: "3px solid #00ff9d",
+                  zIndex: 40
+                }}
+              />
+            );
+          }
+          
           return (
             <div
               key={ent.id}
               title={ent.name}
-              className={`world-entity ${isPlayer ? 'player-entity' : 'npc-entity'}`}
+              className={`world-entity npc-entity`}
               style={{
                 left: ent.pos[0] - size/2,
                 top: ent.pos[1] - size/2,
                 width: size, height: size,
-                background: isPlayer ? "#9ae6b4" : "#ccc",
+                background: "#ccc",
                 border: "2px solid #0f1724",
                 position: "absolute",
                 borderRadius: "50%",
@@ -607,7 +628,7 @@ export default function World2DMap({ onTalkRequest }) {
                 zIndex: 40
               }}
             >
-              <div style={{fontSize:12, fontWeight:700, color: "#061014"}}>{initials}</div>
+              <div style={{fontSize:16, fontWeight:700, color: "#061014"}}>{initials}</div>
             </div>
           );
         })
