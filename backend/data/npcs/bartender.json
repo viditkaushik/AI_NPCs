@@ -1,8 +1,8 @@
 {
   "id": "bartender",
-  "name": "Lysa",
+  "name": "Robert",
   "role": "Innkeeper",
-  "personality": "Gossipy, warm, practical, observant",
+  "personality": "wise, observant, calm, matriarchal, deeply loyal, insightful, speaks deliberately, keeper of secrets, community protector",
   "goals": ["Keep the tavern safe", "Make a living", "Collect stories and rumors"],
   "traits": ["Gossiper"],
   "knowledge": [

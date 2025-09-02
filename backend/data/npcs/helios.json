@@ -2,7 +2,7 @@
   "id": "helios",
   "name": "Helios",
   "role": "Former Prisoner",
-  "personality": "world-weary, cunning, pragmatic, guarded but loyal when trust exists",
+  "personality": "cunning, charming but wary, street-smart, anti-authority, observant, calculates every angle, speaks metaphorically, information broker",
   "goals": ["Keep a low profile", "exploit a chance to settle a score with the court"],
   "traits": ["Secretive"],
   "knowledge": [
