@@ -1,32 +1,37 @@
 // backend/services/LLMGateway.js
 /*
-  Mock LLM gateway for Codespaces prototype.
-  Performs simple safety checks and returns canned (JSON) responses.
+  Gateway from Node → Flask LLM service.
+  Uses Node.js native fetch (no extra deps needed).
 */
 
-const bannedPatterns = [/kill/i, /steal/i, /hack/i, /bomb/i, /cheat/i];
-
 async function generate(prompt) {
-  // safety filter
-  for (const r of bannedPatterns) {
-    if (r.test(prompt)) {
-      return { dialogue: "I won't help with that.", action: null, metadata: { safety: "refused" } };
+  try {
+    const res = await fetch("http://localhost:5005/generate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(prompt),
+    });
+
+    if (!res.ok) {
+      throw new Error(`LLM service returned ${res.status}`);
     }
+
+    const data = await res.json();
+
+    // Ensure object shape for interactController
+    return {
+      dialogue: data.dialogue || "No response",
+      action: data.action || null,
+      metadata: data.metadata || {},
+    };
+  } catch (err) {
+    console.error("LLMGateway error:", err);
+    return {
+      dialogue: "The NPC falls silent.",
+      action: null,
+      metadata: { error: err.message },
+    };
   }
-
-  const p = (prompt || "").toLowerCase();
-
-  // greeting / gossip responses
-  if (p.includes("help") || p.includes("bribe") || p.includes("court") || p.includes("ledger")) {
-    return { dialogue: "I remember hearing something about that — you might ask Helios by the ruins.", action: null, metadata: { tone: "informative" } };
-  }
-
-  if (p.includes("hello") || p.includes("hi") || p.includes("any news")) {
-    return { dialogue: "Hey there — thanks for asking. I remember you helped someone earlier.", action: null, metadata: { tone: "friendly" } };
-  }
-
-  // default fallback
-  return { dialogue: "I have little to say on that.", action: null, metadata: {} };
 }
 
 module.exports = { generate };
